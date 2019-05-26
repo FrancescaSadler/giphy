@@ -3,27 +3,56 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Quoth the Giphy</title>
-</head>
+    <title>Broad City Giphy</title>
+    <link href="https://fonts.googleapis.com/css?family=Anton|Bungee+Shade|Monoton&display=swap" rel="stylesheet">
 
-<body>
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<h1>Broad City Giphy's</h1>
+
+<body background="images/broadcity.jpg">
     <div id="button-view">
 
-
-        <button data-person="Tim Gunn">
-            Tim Gunn
+        <button data-person="Broad City">
+            Broad City
         </button>
 
-        <button data-person="Tyra Banks">
-            Tyra Banks
+        <button data-person="Abbi Jacobson">
+            Abbi 
         </button>
+
+        <button data-person="Ilana Glazer">
+            Ilana 
+        </button>
+
+        <button data-person="Arturo Castro">
+            Jaime
+        </button>
+
+        <button data-person="Paul Downs">
+            Trey
+        </button>
+
+        <button data-person="Hannibal Buress">
+            Lincoln
+        </button>
+
+        <button data-person="John Gemberling">
+            Bevers
+        </button>
+
+        <button data-person="RuPaul">
+           Marcel
+        </button>
+
 
         <form id="pop-form">
-            <label for="person-input">Find your fav!</label>
+            <label for="person-input">Find your fav guest star!</label>
             <input type="text" id="person-input"><br>
 
             <!-- Button triggers new movie to be added -->
-            <input id="add-person" type="submit" value="click me">
+            <input id="add-person" type="submit" value="Add it, kween">
         </form>
 
         <!-- Movies will get dumped Here -->
@@ -37,13 +66,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
-        $("button").on("click", function displayPersonInfo() {
+
+        $("button").on("click", function displayPerson(){
             var person = $(this).attr("data-person");
 
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
                 person + "&api_key=TIfx7KKkYnVLZfqzfLi7S9KMdA1K0Ybw&limit=10";
 
-            var people = ["Tim Gunn", "Tyra Banks"];
+            var people = ["Broad City", "Abbi Jacobson", "Ilana Glazer", "Auturo Castro", "Paul Downs", "Hannibal Buress", "John Gemberling", "RuPaul"];
 
             $.ajax({
                 url: queryURL,
@@ -68,55 +98,33 @@
                         $("#gifs-appear-here").prepend(gifDiv);
                     }
 
-                    function renderButtons() {
-                        $("#button-view").empty();
-
-                        for (var i = 0; i < people.length; i++) {
-                            var a = $("<button>");
-
-                            a.attr("data-name", people[i]);
-                            a.text(people[i]);
-                            $("#button-view").append(a);
-                        }
-                    }
-
-                    $("#add-person").on("click", function (event) {
-                        event.preventDefault();
-
-                        var peeps = $("#person-input").val().trim();
-
-                        people.push(peeps);
-
-                        renderButtons();
-
-                    });
                 });
         });
 
-        // function renderButtons() {
-        //     $("#button-view").empty();
+        function renderButtons() {
+            $("#button-view").empty();
 
-        //     for (var i = 0; i < people.length; i++) {
-        //         var a = $("<button>");
+            for (var i = 0; i < people.length; i++) {
+                var a = $("<button>");
 
-        //         a.attr("data-name", people[i]);
-        //         a.text(people[i]);
-        //         $("#button-view").append(a);
-        //     }
-        // }
+                a.attr("data-name", people[i]);
+                a.text(people[i]);
+                $("#button-view").append(a);
+            }
+        }
 
-        // $("#add-person").on("click", function (event) {
-        //     event.preventDefault();
+        $("#add-person").on("click", function (event) {
+            event.preventDefault();
 
-        //     var peeps = $("#person-input").val().trim();
+            var peeps = $("#person-input").val().trim();
 
-        //     people.push(peeps);
+            people.push(peeps);
 
-        //     renderButtons();
+            renderButtons();
 
-        // });
+        });
 
-        $(document).on("click", ".peeps",displayPersonInfo);
+        $(document).on("click",".peeps", displayPerson());
 
         renderButtons();
 

@@ -1,0 +1,38 @@
+
+body{
+    text-align: center;
+}
+button{
+    font-family: 'Anton', sans-serif;
+    text-align: center;
+    border-radius: 8px;
+    background-color: palevioletred;
+}
+h1{
+    font-family: 'Bungee Shade', cursive;
+    font-size: 50px;
+    
+}
+
+#pop-form{
+    color: black;
+    font-family: 'Bungee Shade', cursive;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+input{
+    font-family: 'Anton', sans-serif;
+    text-align: center;
+    border-radius: 8px;
+    background-color: white;
+
+}
+
+p{
+    font-weight: 600;
+    color: teal;
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
