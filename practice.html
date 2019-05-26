@@ -6,7 +6,6 @@
     <title>Broad City Giphy</title>
     <link href="https://fonts.googleapis.com/css?family=Anton|Bungee+Shade|Monoton&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <iframe src="https://www.youtuberepeater.com/watch?v=GWG9cOIDu04#gsc.tab=0" allow="autoplay" style="display:none" id="iframeAudio"></iframe>
 </head>
 <h1>Broad City Giphy's</h1>
 
@@ -18,11 +17,11 @@
         </button>
 
         <button data-person="Abbi Jacobson">
-            Abbi 
+            Abbi
         </button>
 
         <button data-person="Ilana Glazer">
-            Ilana 
+            Ilana
         </button>
 
         <button data-person="Arturo Castro">
@@ -42,7 +41,7 @@
         </button>
 
         <button data-person="RuPaul">
-           Marcel
+            Marcel
         </button>
 
 
@@ -65,14 +64,16 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
+       
 
-        $("button").on("click", function displayPerson(){
+        var people = ["Broad City", "Abbi Jacobson", "Ilana Glazer", "Auturo Castro", "Paul Downs", "Hannibal Buress", "John Gemberling", "RuPaul"];
+        $("button").on("click", function () {
             var person = $(this).attr("data-person");
 
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
                 person + "&api_key=TIfx7KKkYnVLZfqzfLi7S9KMdA1K0Ybw&limit=10";
 
-            var people = ["Broad City", "Abbi Jacobson", "Ilana Glazer", "Auturo Castro", "Paul Downs", "Hannibal Buress", "John Gemberling", "RuPaul"];
+            // var people = ["Broad City", "Abbi Jacobson", "Ilana Glazer", "Auturo Castro", "Paul Downs", "Hannibal Buress", "John Gemberling", "RuPaul"];
 
             $.ajax({
                 url: queryURL,
@@ -123,7 +124,7 @@
 
         });
 
-        $(document).on("click",".peeps", displayPerson());
+        $(document).on("click", ".peeps");
 
         renderButtons();
 
