@@ -1,12 +1,16 @@
-
+background{
+opacity: 50;
+}
 body{
     text-align: center;
 }
 button{
     font-family: 'Anton', sans-serif;
     text-align: center;
+    letter-spacing: 1px;
     border-radius: 8px;
-    background-color: palevioletred;
+    border: 1px, solid, rgb(255,0,200);
+    background-color:rgb(255, 0, 200);
 }
 h1{
     font-family: 'Bungee Shade', cursive;
@@ -24,6 +28,7 @@ h1{
 input{
     font-family: 'Anton', sans-serif;
     text-align: center;
+    letter-spacing: 1px;
     border-radius: 8px;
     background-color: white;
 
