@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Quoth the Giphy</title>
+</head>
+
+<body>
+    <div id="button-view">
+
+
+        <button data-person="Tim Gunn">
+            Tim Gunn
+        </button>
+
+        <button data-person="Tyra Banks">
+            Tyra Banks
+        </button>
+
+        <form id="pop-form">
+            <label for="person-input">Find your fav!</label>
+            <input type="text" id="person-input"><br>
+
+            <!-- Button triggers new movie to be added -->
+            <input id="add-person" type="submit" value="click me">
+        </form>
+
+        <!-- Movies will get dumped Here -->
+        <div id="person-view"></div>
+
+
+    </div>
+
+    <div id="gifs-appear-here">
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $("button").on("click", function displayPersonInfo() {
+            var person = $(this).attr("data-person");
+
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+                person + "&api_key=TIfx7KKkYnVLZfqzfLi7S9KMdA1K0Ybw&limit=10";
+
+            var people = ["Tim Gunn", "Tyra Banks"];
+
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+                .then(function (response) {
+                    var results = response.data;
+
+                    for (var i = 0; i < results.length; i++) {
+                        var gifDiv = $("<div>");
+
+                        var rating = results[i].rating;
+
+                        var p = $("<p>").text("Rating: " + rating);
+
+                        var personImage = $("<img>");
+                        personImage.attr("src", results[i].images.fixed_height.url);
+
+                        gifDiv.prepend(p);
+                        gifDiv.prepend(personImage);
+
+                        $("#gifs-appear-here").prepend(gifDiv);
+                    }
+
+                    function renderButtons() {
+                        $("#button-view").empty();
+
+                        for (var i = 0; i < people.length; i++) {
+                            var a = $("<button>");
+
+                            a.attr("data-name", people[i]);
+                            a.text(people[i]);
+                            $("#button-view").append(a);
+                        }
+                    }
+
+                    $("#add-person").on("click", function (event) {
+                        event.preventDefault();
+
+                        var peeps = $("#person-input").val().trim();
+
+                        people.push(peeps);
+
+                        renderButtons();
+
+                    });
+                });
+        });
+
+        // function renderButtons() {
+        //     $("#button-view").empty();
+
+        //     for (var i = 0; i < people.length; i++) {
+        //         var a = $("<button>");
+
+        //         a.attr("data-name", people[i]);
+        //         a.text(people[i]);
+        //         $("#button-view").append(a);
+        //     }
+        // }
+
+        // $("#add-person").on("click", function (event) {
+        //     event.preventDefault();
+
+        //     var peeps = $("#person-input").val().trim();
+
+        //     people.push(peeps);
+
+        //     renderButtons();
+
+        // });
+
+        $(document).on("click", ".peeps",displayPersonInfo);
+
+        renderButtons();
+
+
+    </script>
+</body>
+
+</html>

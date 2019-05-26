@@ -1,0 +1,124 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Giphy Magic</title>
+</head>
+
+<body>
+    <div id="buttons">
+
+        <button data-person="Rain">
+            Rain
+        </button>
+
+        <button data-person="Snow">
+            Snow
+        </button>
+
+        <button data-person="Sunshine">
+            Sunshine
+        </button>
+
+        <button data-person="Wind">
+            Windy
+        </button>
+
+        <div class="container">
+            <h1>Weather Search </h1>
+
+            <!-- Rendered buttons will get dumped here  -->
+            <!-- <div id="buttons-view"></div> -->
+
+            <!-- <form id="weather-form">
+                <label for="weather-input">click</label>
+                <input type="text" id="weather-input"><br>
+
+                <!-- Button triggers new movie to be added -->
+                <input id="add-weather" type="submit" value="Add some weather!">
+            </form>
+
+            <!-- Movies will get dumped Here -->
+            <div id="weather-view"></div>
+
+
+        </div>
+
+        <div id="gifs-appear-here">
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript">
+              var Weather = ["Rain","Snow","Sunshine"];
+
+            function displayWeatherInfo() {
+                var weather = $(this).attr("data-name");
+                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+                    person + "&api_key=TIfx7KKkYnVLZfqzfLi7S9KMdA1K0Ybw&limit=10";
+            }
+            $("button").on("click", function () {
+                var person = $(this).attr("data-name");
+                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+                    person + "&api_key=TIfx7KKkYnVLZfqzfLi7S9KMdA1K0Ybw&limit=10";
+
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                })
+                    .then(function (response) {
+                        var results = response.data;
+
+                        for (var i = 0; i < results.length; i++) {
+                            var gifDiv = $("<div>");
+
+                            var rating = results[i].rating;
+
+                            var p = $("<p>").text("Rating: " + rating);
+
+                            var personImage = $("<img>");
+                            personImage.attr("src", results[i].images.fixed_height.url);
+
+                            gifDiv.prepend(p);
+                            gifDiv.prepend(personImage);
+
+                            $("#gifs-appear-here").prepend(gifDiv);
+                        }
+                    });
+            });
+
+            function renderButtons() {
+                $("#buttons-view").empty();
+                for (var i = 0; i < Weather.length; i++) {
+                    var a = $("<button>");
+                    // Adds a class of movie to our button
+                    a.addClass("weather");
+                    // Added a data-attribute
+                    a.attr("data-name", Weather[i]);
+                    // Provided the initial button text
+                    a.text(Weather[i]);
+                    // Added the button to the buttons-view div
+                    $("#buttons-view").append(a);
+                }
+            }
+
+            $("#add-weather").on("click", function (event) {
+                event.preventDefault();
+                // This line of code will grab the input from the textbox
+                var weather = $("#weather-input").val().trim();
+
+                // The movie from the textbox is then added to our array
+                Weather.push(weather);
+
+                // Calling renderButtons which handles the processing of our movie array
+                renderButtons();
+            });
+
+            $(document).on("click", ".weather", displayWeatherInfo);
+
+            renderButtons();
+
+        </script>
+</body>
+
+</html> --> -->
