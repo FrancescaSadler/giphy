@@ -12,38 +12,7 @@
 <body background="images/broadcity.jpg">
     <div id="button-view">
 
-        <button data-person="Broad City">
-            Broad City
-        </button>
-
-        <button data-person="Abbi Jacobson">
-            Abbi
-        </button>
-
-        <button data-person="Ilana Glazer">
-            Ilana
-        </button>
-
-        <button data-person="Arturo Castro">
-            Jaime
-        </button>
-
-        <button data-person="Paul Downs">
-            Trey
-        </button>
-
-        <button data-person="Hannibal Buress">
-            Lincoln
-        </button>
-
-        <button data-person="John Gemberling">
-            Bevers
-        </button>
-
-        <button data-person="RuPaul">
-            Marcel
-        </button>
-
+    </div>
 
         <form id="pop-form">
             <label for="person-input">Find your fav guest star!</label>
@@ -57,8 +26,6 @@
         <div id="person-view"></div>
 
 
-    </div>
-
     <div id="gifs-appear-here">
     </div>
 
@@ -66,11 +33,12 @@
     <script type="text/javascript">
 
 
-        var people = ["Broad City", "Abbi Jacobson", "Ilana Glazer", "Auturo Castro", "Paul Downs", "Hannibal Buress", "John Gemberling", "RuPaul"];
-        
-        $("button").on("click", function () {
-            var person = $(this).attr("data-person");
+        var people = ["Broad City", "Abbi Jacobson", "Ilana GLazer", "Auturo", "Paul Downs", "Hannibal Buress", "John Gemberling", "RuPaul"];
+        renderButtons();
 
+        $(document).on("click","button.person", function () {
+            var person = $(this).attr("data-name");
+            console.log(person);
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
                 person + "&api_key=TIfx7KKkYnVLZfqzfLi7S9KMdA1K0Ybw&limit=10";
 
@@ -118,15 +86,14 @@
 
 
         $("#add-person").on("click", function (event) {
+            console.log("add person")
             event.preventDefault();
 
             var peeps = $("#person-input").val().trim();
 
             people.push(peeps);
 
-            renderButtons();
-
-            $(document).on("click", peeps);
+            console.log(people);
 
             renderButtons();
 
@@ -137,6 +104,7 @@
         // $(document).on("click", peeps );
 
         // renderButtons();
+        renderButtons();
 
 
     </script>
