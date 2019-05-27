@@ -3,120 +3,143 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Giphy Magic</title>
+    <title>Broad City Giphy</title>
+    <link href="https://fonts.googleapis.com/css?family=Anton|Bungee+Shade|Monoton&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+<h1>Broad City Giphy's</h1>
 
-<body>
-    <div id="buttons">
+<body background="images/broadcity.jpg">
+    <div id="button-view">
 
-        <button data-person="Rain">
-            Rain
+        <button data-person="Broad City">
+            Broad City
         </button>
 
-        <button data-person="Snow">
-            Snow
+        <button data-person="Abbi Jacobson">
+            Abbi
         </button>
 
-        <button data-person="Sunshine">
-            Sunshine
+        <button data-person="Ilana Glazer">
+            Ilana
         </button>
 
-        <button data-person="Wind">
-            Windy
+        <button data-person="Arturo Castro">
+            Jaime
         </button>
 
-        <div class="container">
-            <h1>Weather Search </h1>
+        <button data-person="Paul Downs">
+            Trey
+        </button>
 
-            <div id="buttons-view"></div>
+        <button data-person="Hannibal Buress">
+            Lincoln
+        </button>
 
-            <form id="weather-form">
-                <label for="weather-input">click</label>
-                <input type="text" id="weather-input"><br>
+        <button data-person="John Gemberling">
+            Bevers
+        </button>
 
-                <input id="add-weather" type="submit" value="Add some weather!">
-            </form>
-
-          
-            <div id="weather-view"></div>
+        <button data-person="RuPaul">
+            Marcel
+        </button>
 
 
-        </div>
+        <form id="pop-form">
+            <label for="person-input">Find your fav guest star!</label>
+            <input type="text" id="person-input"><br>
 
-        <div id="gifs-appear-here">
-        </div>
+            <!-- Button triggers new movie to be added -->
+            <input id="add-person" type="submit" value="Add it, kween">
+        </form>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script type="text/javascript">
-              var Weather = ["Rain","Snow","Sunshine"];
+        <!-- Movies will get dumped Here -->
+        <div id="person-view"></div>
 
-            function displayWeatherInfo() {
-                var weather = $(this).attr("data-name");
-                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-                    person + "&api_key=TIfx7KKkYnVLZfqzfLi7S9KMdA1K0Ybw&limit=10";
+
+    </div>
+
+    <div id="gifs-appear-here">
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+
+        var people = ["Broad City", "Abbi Jacobson", "Ilana Glazer", "Auturo Castro", "Paul Downs", "Hannibal Buress", "John Gemberling", "RuPaul"];
+        
+        $("button").on("click", function () {
+            var person = $(this).attr("data-person");
+
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+                person + "&api_key=TIfx7KKkYnVLZfqzfLi7S9KMdA1K0Ybw&limit=10";
+
+        
+
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+                .then(function (response) {
+                    var results = response.data;
+
+                    for (var i = 0; i < results.length; i++) {
+                        var gifDiv = $("<div>");
+
+                        var rating = results[i].rating;
+
+                        var p = $("<p>").text("Rating: " + rating);
+
+                        var personImage = $("<img>");
+                        personImage.attr("src", results[i].images.fixed_height.url);
+
+                        gifDiv.prepend(p);
+                        gifDiv.prepend(personImage);
+
+                        $("#gifs-appear-here").prepend(gifDiv);
+                    }
+
+                });
+        });
+
+
+        function renderButtons() {
+            $("#button-view").empty();
+
+            for (var i = 0; i < people.length; i++) {
+                var a = $("<button>");
+                a.addClass("person");
+                a.attr("data-name", people[i]);
+                a.text(people[i]);
+                $("#button-view").append(a);
             }
-            $("button").on("click", function () {
-                var person = $(this).attr("data-name");
-                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-                    person + "&api_key=TIfx7KKkYnVLZfqzfLi7S9KMdA1K0Ybw&limit=10";
+        }
 
-                $.ajax({
-                    url: queryURL,
-                    method: "GET"
-                })
-                    .then(function (response) {
-                        var results = response.data;
 
-                        for (var i = 0; i < results.length; i++) {
-                            var gifDiv = $("<div>");
 
-                            var rating = results[i].rating;
+        $("#add-person").on("click", function (event) {
+            event.preventDefault();
 
-                            var p = $("<p>").text("Rating: " + rating);
+            var peeps = $("#person-input").val().trim();
 
-                            var personImage = $("<img>");
-                            personImage.attr("src", results[i].images.fixed_height.url);
-
-                            gifDiv.prepend(p);
-                            gifDiv.prepend(personImage);
-
-                            $("#gifs-appear-here").prepend(gifDiv);
-                        }
-                    });
-            });
-
-            function renderButtons() {
-                $("#buttons-view").empty();
-                for (var i = 0; i < Weather.length; i++) {
-                    var a = $("<button>");
-                
-                    a.addClass("weather");
-                   
-                    a.attr("data-name", Weather[i]);
-                    // Provided the initial button text
-                    a.text(Weather[i]);
-                    // Added the button to the buttons-view div
-                    $("#buttons-view").append(a);
-                }
-            }
-
-            $("#add-weather").on("click", function (event) {
-                event.preventDefault();
-                // This line of code will grab the input from the textbox
-                var weather = $("#weather-input").val().trim();
-
-                // The movie from the textbox is then added to our array
-                Weather.push(weather);
-
-                // Calling renderButtons which handles the processing of our movie array
-                renderButtons();
-            });
-
-            $(document).on("click", ".weather", displayWeatherInfo);
+            people.push(peeps);
 
             renderButtons();
 
-        </script>
+            $(document).on("click", peeps);
+
+            renderButtons();
+
+        });
+
+    
+
+        // $(document).on("click", peeps );
+
+        // renderButtons();
+
+
+    </script>
 </body>
 
-</html> 
+</html>

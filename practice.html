@@ -64,16 +64,17 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
-       
+
 
         var people = ["Broad City", "Abbi Jacobson", "Ilana Glazer", "Auturo Castro", "Paul Downs", "Hannibal Buress", "John Gemberling", "RuPaul"];
+        
         $("button").on("click", function () {
             var person = $(this).attr("data-person");
 
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
                 person + "&api_key=TIfx7KKkYnVLZfqzfLi7S9KMdA1K0Ybw&limit=10";
 
-            // var people = ["Broad City", "Abbi Jacobson", "Ilana Glazer", "Auturo Castro", "Paul Downs", "Hannibal Buress", "John Gemberling", "RuPaul"];
+        
 
             $.ajax({
                 url: queryURL,
@@ -101,17 +102,20 @@
                 });
         });
 
+
         function renderButtons() {
             $("#button-view").empty();
 
             for (var i = 0; i < people.length; i++) {
                 var a = $("<button>");
-
+                a.addClass("person");
                 a.attr("data-name", people[i]);
                 a.text(people[i]);
                 $("#button-view").append(a);
             }
         }
+
+
 
         $("#add-person").on("click", function (event) {
             event.preventDefault();
@@ -122,11 +126,17 @@
 
             renderButtons();
 
+            $(document).on("click", peeps);
+
+            renderButtons();
+
         });
 
-        $(document).on("click", ".peeps");
+    
 
-        renderButtons();
+        // $(document).on("click", peeps );
+
+        // renderButtons();
 
 
     </script>
